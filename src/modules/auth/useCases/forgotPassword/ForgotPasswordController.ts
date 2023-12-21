@@ -1,24 +1,22 @@
 import { Request, Response } from 'express';
 import {
-  ICreateUserController,
-  ICreateUserService,
+  IForgotPasswordService,
+  IForgotPasswordController,
 } from '../../types/functions';
 
 interface IController {
-  createUserService: ICreateUserService;
+  forgotPasswordService: IForgotPasswordService;
 }
 
-export function CreateUserController({
-  createUserService,
-}: IController): ICreateUserController {
+export function ForgotPasswordController({
+  forgotPasswordService,
+}: IController): IForgotPasswordController {
   return {
     handler: async (request: Request, response: Response) => {
-      const { email, name, password } = request.body;
+      const { email } = request.body;
 
-      const { data, error } = await createUserService.execute({
+      const { data, error } = await forgotPasswordService.execute({
         email,
-        name,
-        password,
       });
 
       if (error && error.statusCode) {

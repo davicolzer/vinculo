@@ -26,7 +26,7 @@ export function CreateUserService({
             },
           };
         }
-        const salt = await genSalt(Number(process.env.BCRYPT_SALT));
+        const salt = await genSalt(10);
         const encryptedPassword = await hash(password, salt);
         const data = await userRepository.create(
           { name, email, password: encryptedPassword },

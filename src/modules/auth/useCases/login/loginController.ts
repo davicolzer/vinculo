@@ -1,3 +1,4 @@
+import { Request, Response } from 'express';
 import {
   ILoginController,
   ILoginService,
@@ -11,7 +12,7 @@ export function LoginController({
   loginService,
 }: IController): ILoginController {
   return {
-    handler: async (request, response) => {
+    handler: async (request: Request, response: Response) => {
       const { email, password } = request.body
 
       const { data, error } = await loginService.execute({

@@ -1,12 +1,5 @@
 import { createTransport } from 'nodemailer';
-import { emailTemplate, IEmailTemplate } from './templates';
-
-interface ISendMail {
-  templateHtml: string;
-  fromName: string;
-  toEmail: string;
-  toName?: string;
-}
+import { ISendMail } from './type';
 
 const transporter = createTransport({
   host: process.env.NODEMAILER_HOST,
@@ -18,11 +11,20 @@ const transporter = createTransport({
   },
 });
 
-export async function sendMail({ fromName, toEmail, templateHtml }: ISendMail) {
-  const token = '';
-  const info = await transporter.sendMail({
-    from: fromName,
-    to: toEmail,
-    html: templateHtml,
-  });
+export async function sendMail({
+  fromName,
+  toEmail,
+  template: { html, subject },
+}: ISendMail) {
+  try {
+    await transporter.sendMail({
+      from: fromName,
+      to: toEmail,
+      subject,
+      html,
+    });
+
+  } catch (e) {
+    throw e;
+  }
 }

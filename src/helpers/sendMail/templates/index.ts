@@ -1,9 +1,6 @@
-import { recoveryPassword } from './recoveryPassword';
+import { IEmailTemplate } from '../type';
+import { forgotPassword } from './forgotPassword';
 
-export interface IEmailTemplate {
-  RECOVERY_PASSWORD: (x: { token: string }) => string;
-}
-
-export const emailTemplate = {
-  RECOVERY_PASSWORD: recoveryPassword,
+export const emailTemplate: IEmailTemplate = {
+  FORGOT_PASSWORD: forgotPassword,
 };
